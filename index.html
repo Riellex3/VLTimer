@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>My first web page</title>
+
+  </head>
+
+  <body>
+    <script>
+      mousedOver = 0;
+      minutes = 60;
+      seconds = 00;
+      var time;
+      var gargoyleMin = "N/A";
+      var gargoleSec = "N/A";
+      var golemMin = "N/A";
+      var golemSec = "N/A";
+      var jailMin = "N/A";
+      var jailSec = "N/A";
+      // Countdown Timer
+      function setStartTime() {
+        const startMinutes = document.getElementById("inputMinutes").value;
+        const startSeconds = document.getElementById("inputSeconds").value;
+        time = parseInt(startMinutes) * 60 + parseInt(startSeconds)
+        console.log(startMinutes + " " + startSeconds);
+
+      }
+      function startTimer() {
+        minutes = Math.floor(time/60);
+        seconds = time % 60;
+        document.getElementById("currentTime").value = minutes + ":" + seconds;
+        time--;
+      }
+
+      function mouseOverImage(buttonNum) {
+        switch(buttonNum) {
+          case 1:
+            document.images["gargoylebutton"].src = "images/gargoyleu.png";
+            break;
+          case 2:
+            document.images["golembutton"].src = "images/golemu.png"
+            break;
+        }
+      }
+      function mouseOutImage(buttonNum) {
+        switch(buttonNum) {
+          case 1:
+            document.images["gargoylebutton"].src = "images/gargoyle.png"
+          case 2:
+            document.images["golembutton"].src = "images/golem.png"
+        }
+      }
+      function pasteTime(buttonNum) {
+        switch(buttonNum) {
+          case 1:
+            timePredict = 150;
+            break;
+          case 2:
+            timePredict = 120;
+            break;
+        }
+        skillTimerSec = (time - timePredict) % 60;
+        skillTimerMin = Math.floor((time - timePredict) / 60);
+        switch(buttonNum) {
+          case 1:
+            gargoyleMin = skillTimerMin;
+            gargoyleSec = skillTimerSec;
+            break;
+          case 2:
+            golemMin = skillTimerMin;
+            golemSec = skillTimerSec;
+            break;
+
+        }
+        updateTime = gargoyleMin + ":" + gargoyleSec + " gargoyle  |  " + golemMin + ":" + golemSec + " golem" 
+        document.getElementById("pasteTimers").value = updateTime
+        copyTime = document.getElementById("pasteTimers");
+        copyTime.select();
+        navigator.clipboard.writeText(copyTime.value);
+      }
+    </script>
+    <input type = "text" id = "inputMinutes" name = "inputMinutes" placeholder = "Minutes"><br><br>
+    <input type = "text" id = "inputSeconds" name = "inputSeconds" placeholder = "Seconds"><br><br>
+    <input type = "button" id = "startTimer" name = "startTimer" value = "Start" onclick = 
+      "setStartTime(), 
+      startTimer(), 
+      setInterval(startTimer,1000)"><br><br>
+    <input type = "text" id = "currentTime" name = "currentTime" value = "Current Time" readonly><br><br>
+    <img 
+      onMouseOver="mouseOverImage(1)"
+      onMouseOut="mouseOutImage(1)"
+      onClick="mouseOutImage(1),pasteTime(1)"
+      name = "gargoylebutton"
+      src = "images/gargoyle.png" 
+      width = "100"
+      height = "100"
+      alt = "gargoylebutton">
+    
+    <img 
+      onMouseOver="mouseOverImage(2)"
+      onMouseOut="mouseOutImage(2)"
+      onClick="mouseOutImage(2),pasteTime(2)"
+      name = "golembutton"
+      src = "images/golem.png" 
+      width = "100"
+      height = "100"
+      alt = "golembutton"><br><br>  
+    <br><br>
+    <input type = "text" id = "pasteTimers" name = "pasteTimers" placeholder = "Skill Timers" size = "50" readonly><br><br>
+  </body>
+</html>
