@@ -27,8 +27,9 @@
         realSeconds = startMinutes.substring(3,5)
         time = parseInt(realMinutes) * 60 + parseInt(realSeconds)
 
-        startTimer(), 
-        startTiming = setInterval(startTimer,1000)
+        startTimer(); 
+        resetTimer();
+        startTiming = setInterval(startTimer,1000);
       }
       function startTimer() {
         minutes = Math.floor(time/60);
