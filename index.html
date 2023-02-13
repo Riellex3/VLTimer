@@ -12,8 +12,10 @@
       seconds = 00;
       var time;
       var startTiming;
+      var gargoyleTime = "N/A";
       var gargoyleMin = "N/A";
       var gargoleSec = "N/A";
+      var golemTime = "N/A";
       var golemMin = "N/A";
       var golemSec = "N/A";
       var jailMin = "N/A";
@@ -32,7 +34,23 @@
         minutes = Math.floor(time/60);
         seconds = time % 60;
         document.getElementById("currentTime").value = minutes + ":" + seconds;
+        if (time < gargoyleTime) {
+          gargoyleMin = "N/A"
+          gargoyleSec = "N/A"
+          updateTime = gargoyleMin + ":" + gargoyleSec + " gargoyle  |  " + golemMin + ":" + golemSec + " golem" 
+          document.getElementById("pasteTimers").value = updateTime
+        }
+        if (time < golemTime) {
+          golemMin = "N/A";
+          golemSec = "N/A";
+          updateTime = gargoyleMin + ":" + gargoyleSec + " gargoyle  |  " + golemMin + ":" + golemSec + " golem" 
+          document.getElementById("pasteTimers").value = updateTime
+        }
         time--;
+        if (time == 0) {
+          clearInterval(startTiming);
+          return;
+        }
       }
       function resetTimer() {
         clearInterval(startTiming)
@@ -72,12 +90,20 @@
         skillTimerMin = Math.floor((time - timePredict) / 60);
         switch(buttonNum) {
           case 1:
-            garyogleTime = time-timePredict;
+            gargoyleTime = time-timePredict;
+            if (gargoyleTime < 0) {
+              return;
+            }
+
             gargoyleMin = skillTimerMin;
             gargoyleSec = skillTimerSec;
             break;
           case 2:
             golemTime = time-timePredict;
+            if (golemTime < 0) {
+              return;
+            }
+
             golemMin = skillTimerMin;
             golemSec = skillTimerSec;
             break;
