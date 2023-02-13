@@ -11,6 +11,7 @@
       minutes = 60;
       seconds = 00;
       var time;
+      var startTiming;
       var gargoyleMin = "N/A";
       var gargoleSec = "N/A";
       var golemMin = "N/A";
@@ -23,12 +24,21 @@
         realMinutes = startMinutes.substring(0,2)
         realSeconds = startMinutes.substring(3,5)
         time = parseInt(realMinutes) * 60 + parseInt(realSeconds)
+
+        startTimer(), 
+        startTiming = setInterval(startTimer,1000)
       }
       function startTimer() {
         minutes = Math.floor(time/60);
         seconds = time % 60;
         document.getElementById("currentTime").value = minutes + ":" + seconds;
         time--;
+      }
+      function resetTimer() {
+        clearInterval(startTiming)
+        document.getElementById("inputTime").value = "";
+        document.getElementById("currentTime").value = "";
+        document.getElementById("pasteTimers").value = "";
       }
 
       function mouseOverImage(buttonNum) {
@@ -83,11 +93,11 @@
     <h1>Sync VL Time Left (in-game) with timer below and hit "Start"</h1>
     <input type = "text" id = "inputTime" name = "inputTime" placeholder = "XX:XX" style = "font-size:18px"> Time left (in-game)<br><br>
     <input type = "button" id = "startTimer" name = "startTimer" value = "Start" style = "width:100px;height:50px;font-size:30px" onclick = 
-      "setStartTime(), 
-      startTimer(), 
-      setInterval(startTimer,1000)"><br><br>
+      "setStartTime()">
+    <input type = "button" id = "resetTimer" name = "resetTimer" value = "Reset" style = "width:100px;height:50px;font-size:30px" onclick = "resetTimer()">
+    <br><br>
     <h2>Time Remaining in VL</h2>
-    <input type = "text" id = "currentTime" name = "currentTime" value = "Current Time" style = "border:none;font-size:30px" readonly><br><br>
+    <input type = "text" id = "currentTime" name = "currentTime" placeholder = "Current Time" style = "border:none;font-size:30px" readonly><br><br>
     <img 
       onMouseOver="mouseOverImage(1)"
       onMouseOut="mouseOutImage(1)"
