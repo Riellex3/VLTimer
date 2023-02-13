@@ -59,14 +59,16 @@
             timePredict = 120;
             break;
         }
-        skillTimerSec = (time - timePredict) % 60;
+        skillTimerSec = (time - timePredict) % 60 + 1;
         skillTimerMin = Math.floor((time - timePredict) / 60);
         switch(buttonNum) {
           case 1:
+            garyogleTime = time-timePredict;
             gargoyleMin = skillTimerMin;
             gargoyleSec = skillTimerSec;
             break;
           case 2:
+            golemTime = time-timePredict;
             golemMin = skillTimerMin;
             golemSec = skillTimerSec;
             break;
@@ -79,13 +81,15 @@
         navigator.clipboard.writeText(copyTime.value);
       }
     </script>
-    <input type = "text" id = "inputMinutes" name = "inputMinutes" placeholder = "Minutes"><br><br>
-    <input type = "text" id = "inputSeconds" name = "inputSeconds" placeholder = "Seconds"><br><br>
-    <input type = "button" id = "startTimer" name = "startTimer" value = "Start" onclick = 
+    <h1>Sync VL Time Left (in-game) with timer below and hit "Start"</h1>
+    <input type = "text" id = "inputMinutes" name = "inputMinutes" placeholder = "Minutes" style = "font-size:18px"> Minutes left (in-game)<br><br>
+    <input type = "text" id = "inputSeconds" name = "inputSeconds" placeholder = "Seconds" style = "font-size:18px"> Seconds left (in-game)<br><br>
+    <input type = "button" id = "startTimer" name = "startTimer" value = "Start" style = "width:100px;height:50px;font-size:30px" onclick = 
       "setStartTime(), 
       startTimer(), 
       setInterval(startTimer,1000)"><br><br>
-    <input type = "text" id = "currentTime" name = "currentTime" value = "Current Time" readonly><br><br>
+    <h2>Time Remaining in VL</h2>
+    <input type = "text" id = "currentTime" name = "currentTime" value = "Current Time" style = "border:none;font-size:30px" readonly><br><br>
     <img 
       onMouseOver="mouseOverImage(1)"
       onMouseOut="mouseOutImage(1)"
@@ -106,6 +110,6 @@
       height = "100"
       alt = "golembutton"><br><br>  
     <br><br>
-    <input type = "text" id = "pasteTimers" name = "pasteTimers" placeholder = "Skill Timers" size = "50" readonly><br><br>
+    <input type = "text" id = "pasteTimers" name = "pasteTimers" placeholder = "Skill Timers" size = "50" style = "font-size:18px" readonly><br><br>
   </body>
 </html>
