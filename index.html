@@ -12,14 +12,16 @@
       seconds = 00;
       var time;
       var startTiming;
-      var gargoyleTime = "N/A";
-      var gargoyleMin = "N/A";
-      var gargoyleSec = "N/A";
-      var golemTime = "N/A";
-      var golemMin = "N/A";
-      var golemSec = "N/A";
-      var jailMin = "N/A";
-      var jailSec = "N/A";
+      var gargoyleTime = 0;
+      var gargoyleMin = 0;
+      var gargoyleSec = 0;
+      var golemTime = 0;
+      var golemMin = 0;
+      var golemSec = 0;
+      var jailMin = 0;
+      var jailSec = 0;
+      var minutesStr = 0;
+      var secondsStr = 0;
       // Countdown Timer
       function setStartTime() {
         const startMinutes = document.getElementById("inputTime").value;
@@ -34,17 +36,25 @@
       function startTimer() {
         minutes = Math.floor(time/60);
         seconds = time % 60;
-        document.getElementById("currentTime").value = minutes + ":" + seconds;
+        minutesStr = padThis(minutes);
+        secondsStr = padThis(seconds);
+        document.getElementById("currentTime").value = minutesStr + ":" + secondsStr;
         if (time < gargoyleTime) {
-          gargoyleMin = "N/A"
-          gargoyleSec = "N/A"
-          updateTime = gargoyleMin + ":" + gargoyleSec + " gargoyle  |  " + golemMin + ":" + golemSec + " golem" 
+          gargoyleMin = 0
+          gargoyleSec = 0
+          gargoyleMinStr = padThis(gargoyleMin)
+          gargoyleSecStr = padThis(gargoyleSec)
+          updateTheTime();
+          updateTime = gargoyleMinStr + ":" + gargoyleSecStr + " gargoyle  |  " + golemMinStr + ":" + golemSecStr + " golem" 
           document.getElementById("pasteTimers").value = updateTime
         }
         if (time < golemTime) {
-          golemMin = "N/A";
-          golemSec = "N/A";
-          updateTime = gargoyleMin + ":" + gargoyleSec + " gargoyle  |  " + golemMin + ":" + golemSec + " golem" 
+          golemMin = 0;
+          golemSec = 0;
+          golemMinStr = padThis(golemMin)
+          golemSecStr = padThis(golemSec)
+          updateTheTime();
+          updateTime = gargoyleMinStr + ":" + gargoyleSecStr + " gargoyle  |  " + golemMinStr + ":" + golemSecStr + " golem" 
           document.getElementById("pasteTimers").value = updateTime
         }
         time--;
@@ -89,6 +99,10 @@
         }
         skillTimerSec = (time - timePredict) % 60 + 1;
         skillTimerMin = Math.floor((time - timePredict) / 60);
+        if (skillTimerSec == 60) {
+          skillTimerSec = 0;
+          skillTimerMin = skillTimerMin+1
+        }
         switch(buttonNum) {
           case 1:
             gargoyleTime = time-timePredict;
@@ -110,26 +124,45 @@
             break;
 
         }
-        updateTime = gargoyleMin + ":" + gargoyleSec + " gargoyle  |  " + golemMin + ":" + golemSec + " golem" 
+        gargoyleMinStr = padThis(gargoyleMin)
+        gargoyleSecStr = padThis(gargoyleSec)
+        golemMinStr = padThis(golemMin)
+        golemSecStr = padThis(golemSec)
+        updateTheTime();
         document.getElementById("pasteTimers").value = updateTime
         copyTime = document.getElementById("pasteTimers");
         copyTime.select();
         navigator.clipboard.writeText(copyTime.value);
+      }
+      function updateTheTime() {
+        if ((gargoyleMin == 0) && (gargoyleMin == 0)) {
+          updateTime = golemMinStr + ":" + golemSecStr + " golem" 
+        }
+        else if (golemMin == 0 && golemSec == 0) {
+          updateTime = gargoyleMinStr + ":" + gargoyleSecStr + " gargoyle"
+        }
+        else {
+          updateTime = gargoyleMinStr + ":" + gargoyleSecStr + " gargoyle  |  " + golemMinStr + ":" + golemSecStr + " golem" 
+        }
+      }
+      function padThis(toStr) {
+        return toStr.toString().padStart(2, "0");
       }
       function copyTimer() {
         copyTime = document.getElementById("pasteTimers");
         copyTime.select();
         navigator.clipboard.writeText(copyTime.value);
       }
+      
 
       function newBody() {
         document.getElementById("pasteTimers").value = ""
-        gargoyleTime = "N/A";
-        gargoyleMin = "N/A";
-        gargoyleSec = "N/A";
-        golemTime = "N/A";
-        golemMin = "N/A";
-        golemSec = "N/A";
+        gargoyleTime = 0;
+        gargoyleMin = 0;
+        gargoyleSec = 0;
+        golemTime = 0;
+        golemMin = 0;
+        golemSec = 0;
       }
     </script>
     <h1>Sync VL Time Left (in-game) with timer below and hit "Start"</h1>
