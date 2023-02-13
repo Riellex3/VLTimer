@@ -19,11 +19,10 @@
       var jailSec = "N/A";
       // Countdown Timer
       function setStartTime() {
-        const startMinutes = document.getElementById("inputMinutes").value;
-        const startSeconds = document.getElementById("inputSeconds").value;
-        time = parseInt(startMinutes) * 60 + parseInt(startSeconds)
-        console.log(startMinutes + " " + startSeconds);
-
+        const startMinutes = document.getElementById("inputTime").value;
+        realMinutes = startMinutes.substring(0,2)
+        realSeconds = startMinutes.substring(3,5)
+        time = parseInt(realMinutes) * 60 + parseInt(realSeconds)
       }
       function startTimer() {
         minutes = Math.floor(time/60);
@@ -82,8 +81,7 @@
       }
     </script>
     <h1>Sync VL Time Left (in-game) with timer below and hit "Start"</h1>
-    <input type = "text" id = "inputMinutes" name = "inputMinutes" placeholder = "Minutes" style = "font-size:18px"> Minutes left (in-game)<br><br>
-    <input type = "text" id = "inputSeconds" name = "inputSeconds" placeholder = "Seconds" style = "font-size:18px"> Seconds left (in-game)<br><br>
+    <input type = "text" id = "inputTime" name = "inputTime" placeholder = "XX:XX" style = "font-size:18px"> Time left (in-game)<br><br>
     <input type = "button" id = "startTimer" name = "startTimer" value = "Start" style = "width:100px;height:50px;font-size:30px" onclick = 
       "setStartTime(), 
       startTimer(), 
