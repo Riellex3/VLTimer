@@ -64,9 +64,16 @@
       }
       function resetTimer() {
         clearInterval(startTiming)
+        gargoyleTime = 0;
+        gargoyleMin = 0;
+        gargoyleSec = 0;
+        golemTime = 0;
+        golemMin = 0;
+        golemSec = 0;
         document.getElementById("inputTime").value = "";
         document.getElementById("currentTime").value = "";
         document.getElementById("pasteTimers").value = "";
+
       }
 
       function mouseOverImage(buttonNum) {
