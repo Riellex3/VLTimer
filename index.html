@@ -121,6 +121,16 @@
         copyTime.select();
         navigator.clipboard.writeText(copyTime.value);
       }
+
+      function newBody() {
+        document.getElementById("pasteTimers").value = ""
+        gargoyleTime = "N/A";
+        gargoyleMin = "N/A";
+        gargoleSec = "N/A";
+        golemTime = "N/A";
+        golemMin = "N/A";
+        golemSec = "N/A";
+      }
     </script>
     <h1>Sync VL Time Left (in-game) with timer below and hit "Start"</h1>
     <input type = "text" id = "inputTime" name = "inputTime" placeholder = "XX:XX" style = "font-size:18px"> Time left (in-game)<br><br>
@@ -156,6 +166,7 @@
     <input type = "text" id = "pasteTimers" name = "pasteTimers" placeholder = "Skill Timers" size = "50" style = "font-size:24px" readonly>
     <br>
     <input type = "button" id = "copyTimer" name = "copyTimer" value = "Copy" style = "width:100px;height:50px;font-size:30px" onclick = "copyTimer()">
+    <input type = "button" id = "newBody" name = "newBody" value = "New Body" style = "width:160px;height:50px;font-size:30px" onclick = "newBody()">
     <br><br>
   </body>
 </html>
