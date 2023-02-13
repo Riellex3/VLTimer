@@ -115,6 +115,11 @@
         copyTime.select();
         navigator.clipboard.writeText(copyTime.value);
       }
+      function copyTimer() {
+        copyTime = document.getElementById("pasteTimers");
+        copyTime.select();
+        navigator.clipboard.writeText(copyTime.value);
+      }
     </script>
     <h1>Sync VL Time Left (in-game) with timer below and hit "Start"</h1>
     <input type = "text" id = "inputTime" name = "inputTime" placeholder = "XX:XX" style = "font-size:18px"> Time left (in-game)<br><br>
@@ -142,8 +147,14 @@
       src = "images/golem.png" 
       width = "100"
       height = "100"
-      alt = "golembutton"><br><br>  
+      alt = "golembutton">   
+    <br>
+    Click on a mob to track their next spawn.
+    <br>  
     <br><br>
-    <input type = "text" id = "pasteTimers" name = "pasteTimers" placeholder = "Skill Timers" size = "50" style = "font-size:18px" readonly><br><br>
+    <input type = "text" id = "pasteTimers" name = "pasteTimers" placeholder = "Skill Timers" size = "50" style = "font-size:24px" readonly>
+    <br>
+    <input type = "button" id = "copyTimer" name = "copyTimer" value = "Copy" style = "width:100px;height:50px;font-size:30px" onclick = "copyTimer()">
+    <br><br>
   </body>
 </html>
